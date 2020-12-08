@@ -1,44 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Hello PersonneController !
-{% endblock %}
+{%  form_theme form 'bootstrap_4_layout.html.twig' %}
 
-{% block body %}
+    {% block title %}
+        Hello PersonneController !
+    {% endblock title%}
 
-<h1> Hello {{ controller_name }}! </h1>
+    {% block body %}
 
-    <div>
-        {{ form_start(form) }}
+    <h1> Hello {{ controller_name }}! </h1>
+
         <div>
-            {{ form_label(form.nom, "Nom de la personne") }}
+            {{ form_start(form) }}
             <div>
-                {{ form_widget(form.nom) }}
+                {{ form_label(form.nom, "Nom de la personne") }}
+                <div>
+                    {{ form_widget(form.nom) }}
+                </div>
             </div>
-        </div>
-        <div>
-            {{ form_label(form.prenom, "Prénom de la personne") }}
             <div>
-                {{ form_widget(form.prenom) }}
+                {{ form_label(form.prenom, "Prénom de la personne") }}
+                <div>
+                    {{ form_widget(form.prenom) }}
+                </div>
             </div>
+            <div>
+                {{ form_rest(form) }}
+            </div>
+            {{ form_end(form) }}
         </div>
-        <div>
-            {{ form_rest(form) }}
-        </div>
+
+
+
         {{ form_end(form) }}
-    </div>
+    {% endblock %}
 
+    {% block javascripts %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
 
+        </script>
+        <script src="{{ asset('js/script.js') }}">
 
-    {{ form_end(form) }}
-{% endblock %}
+        </script>
+    {% endblock %}
 
-{% block javascripts %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-
-    </script>
-    <script src="{{ asset('js/script.js') }}">
-
-    </script>
-{% endblock %}
 
