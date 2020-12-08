@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Personne;
+use App\Entity\Sport;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
@@ -29,13 +31,14 @@ class PersonneType extends AbstractType {
                     $form->add('adresse', AdresseType::class);
                 }
             })
-            ->add('sports',ChoiceType::class, [
-                'choices' => [
-                    'Foot' => 'Football',
-                    'Tennis' => 'Tennis',
-                    'Rugby' => 'Rugby',
-                    'Other' => null,
-                    ],
+            ->add('sports', EntityType::class, [
+                'class' => Sport::class,
+                'choice_label' => 'nom',
+                'query_builder' => function (EntityRepository $repo) {
+                return $repo->createQueryBuilder('s');
+                },
+                'label' => 'Sports préférés',
+                'multiple' => true
             ])
             ->add('accepter', CheckboxType::class, ['mapped' => false])
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
