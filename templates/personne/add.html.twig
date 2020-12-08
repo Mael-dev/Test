@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hello PersonneController !
+{% endblock %}
+
+{% block body %}
+
+<h1> Hello {{ controller_name }}! </h1>
+
+    <div>
+        {{ form_start(form) }}
+        <div>
+            {{ form_label(form.nom, "Nom de la personne") }}
+            <div>
+                {{ form_widget(form.nom) }}
+            </div>
+        </div>
+        <div>
+            {{ form_label(form.prenom, "Prénom de la personne") }}
+            <div>
+                {{ form_widget(form.prenom) }}
+            </div>
+        </div>
+        <div>
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+
+
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+
+    </script>
+    <script src="{{ asset('js/script.js') }}">
+
+    </script>
+{% endblock %}
+
